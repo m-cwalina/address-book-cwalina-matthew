@@ -57,3 +57,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # A user can select from different countries in form
 gem 'country_select', '~> 6.0'
+
+# Gem to create forms
+gem 'simple_form'

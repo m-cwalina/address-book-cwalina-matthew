@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   # Root route for home page
   root to: 'pages#home', as: :home
 
-  resources :people, only: %i[ index ]
+  resources :people, only: %i[ new index create ]
 end

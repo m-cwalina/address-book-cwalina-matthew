@@ -1,14 +1,15 @@
 class PeopleController < ApplicationController
-  def new
-    @person = Person.new
-  end
 
   def index
     @people = Person.all
+    @person = Person.new
+    @person.addresses.build
+    @person.emails.build
+    @person.phone_numbers.build
   end
 
   def create
-    @person = Person.new(person_params)
+    @person = Person.create!(person_params)
   end
 
   private
@@ -21,9 +22,25 @@ class PeopleController < ApplicationController
       :last_name,
       :SSN,
       :birth_date,
-      addresses_attributes: %i[id street town zip_code state country],
-      emails_attributes: %i[email_address comment],
-      phone_numbers_attributes: %i[phone_number comment]
+      :comment,
+      addresses_attributes: [
+        :id,
+        :street,
+        :town,
+        :zip_code,
+        :state,
+        :country
+      ],
+      emails_attributes: [
+        :id,
+        :email_address,
+        :comment
+      ],
+      phone_numbers_attributes: [
+        :id,
+        :phone_number,
+        :comment
+      ]
     )
   end
 end

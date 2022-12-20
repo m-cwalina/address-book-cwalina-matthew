@@ -1,0 +1,24 @@
+<%= form_with model: @person do |form| %>
+  <%= form.date_select :birth_date %>
+  Address:
+  <ul>
+    <%= form.fields_for :addresses do |addresses_form| %>
+      <li>
+        <%= addresses_form.label :street %>
+        <%= addresses_form.text_field :street %>
+
+        <%= addresses_form.label :town %>
+        <%= addresses_form.text_field :town %>
+
+        <%= addresses_form.label :zip_code %>
+        <%= addresses_form.text_field :zip_code %>
+
+        <%= addresses_form.label :state %>
+        <%= addresses_form.text_field :state %>
+
+        <%= addresses_form.label :country %>
+        <%= addresses_form.text_field :country %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

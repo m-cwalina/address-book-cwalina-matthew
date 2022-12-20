@@ -1,5 +1,6 @@
 <%= form_with model: @person do |form| %>
   <%= form.date_select :birth_date %>
+
   Address:
   <ul>
     <%= form.fields_for :addresses do |addresses_form| %>
@@ -18,6 +19,8 @@
 
         <%= addresses_form.label :country %>
         <%= addresses_form.text_field :country %>
+
+        <%= addresses_form.country_select :country %>
       </li>
     <% end %>
   </ul>

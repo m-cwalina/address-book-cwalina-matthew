@@ -1,2 +1,1 @@
-var body = document.getElementById("people");
-body.innerHTML = '<%= j render @person %>' + body.innerHTML;
+$('#edit_person_<%= @person.id %>').replaceWith('<%= j render("person_display") %>');

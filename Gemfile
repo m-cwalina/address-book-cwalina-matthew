@@ -60,3 +60,6 @@ gem 'country_select', '~> 6.0'
 
 # Gem to create forms
 gem 'simple_form'
+
+# Able to use JQuery
+gem 'jquery-rails'

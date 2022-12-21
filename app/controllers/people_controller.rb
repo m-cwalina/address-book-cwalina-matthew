@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   before_action :authorize
-  before_action :set_person, only: %i[edit update destroy]
+  before_action :set_person, only: %i[update destroy]
 
   def index
     @people = Person.all
@@ -26,12 +26,19 @@ class PeopleController < ApplicationController
   end
 
   def edit
-    @person
+    @person = Person.find(params[:id])
+    respond_to do |format|
+      format.html { @person.save }
+      format.json
+    end
   end
 
   def update
     @person.update(person_params)
-    redirect_to people_path
+    respond_to do |format|
+      format.html { redirect_to people_path }
+      format.js
+    end
   end
 
   def destroy

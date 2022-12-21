@@ -8,14 +8,8 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-Rails.ajax({
-  url: "/people",
-  type: "get",
-  data: "",
-  success: function (data) { },
-  error: function (data) { },
-})

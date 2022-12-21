@@ -8,9 +8,16 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   </head>
 
   <body>
+  <script>
+    $.get("/people", function (data) {
+    alert("Vegetables are good for you!");
+    console.log('Hi')
+    });
+  </script>
     <%= yield %>
   </body>
 </html>

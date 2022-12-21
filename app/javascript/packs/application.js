@@ -11,3 +11,11 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+Rails.ajax({
+  url: "/people",
+  type: "get",
+  data: "",
+  success: function (data) { },
+  error: function (data) { },
+})

@@ -1,5 +1,4 @@
-<%= form_for(@person) do |form| %>
-
+<%= form_with(model: @person, local: false) do |form| %>
   <%= form.label :salutation %>
   <%= form.select :salutation, ["Mr", "Mrs.", "Ms."] %>
   <%= form.label :first_name %>
@@ -61,5 +60,5 @@
       <li>
     <% end %>
   </ul>
-  <%= form.submit "Add New Person" %>
+  <%= form.submit 'Add Person' %>
 <% end %>

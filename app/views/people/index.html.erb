@@ -1,7 +1,38 @@
-<div id='show-edit'>
+<div id='form'>
 <%= render 'form', person: @person %>
 </div>
 
 <div id="people">
   <%= render @people %>
 </div>
+
+<div id="people-container">
+</div>
+
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  $(document).ready(function() {
+      $.get("api/v1/people", function(data) {
+          let string = data.map(person => {
+              return `
+                  <div class="person-name-detail">
+                      <h4>First Name: ${person.first_name}</h4>
+                      <h4>Middle Name: ${ person.middle_name}</h4>
+                      <h4>Last Name: ${ person.last_name}</h4>
+                  </div>`
+          }).join('');
+          $("#people-container").html(string);
+      });
+  });
+});
+
+/*
+$.ajax({
+  url: "/api/v1/people",
+  data: formData,
+  success: function( result ) {
+    $( "#people-container" ).html(result);
+  }
+})
+*/
+</script>

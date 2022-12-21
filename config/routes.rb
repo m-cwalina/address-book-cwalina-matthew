@@ -11,4 +11,10 @@ Rails.application.routes.draw do
   root to: 'pages#home', as: :home
 
   resources :people
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :people, only: %i[index create]
+    end
+  end
 end

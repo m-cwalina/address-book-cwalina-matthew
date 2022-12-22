@@ -1,3 +1,4 @@
+
 class PeopleController < ApplicationController
   before_action :authorize
   before_action :set_person, only: %i[edit update destroy]
@@ -15,7 +16,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.save
         format.js
-        format.html { redirect_to action: 'index', notice: 'Person was successfully created.' }
+        format.html { redirect_to people_path, notice: 'Person was successfully created.' }
         format.json { render :show, status: :created, location: @person }
       else
         format.html { render :index, status: :unprocessable_entity }
@@ -44,7 +45,7 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(
+    params.permit(
       :salutation, :first_name, :middle_name, :last_name, :SSN, :birth_date, :comment,
       addresses_attributes: [:id, :street, :town, :zip_code, :state, :country, :_destroy],
       emails_attributes: [:id, :email_address, :comment, :_destroy],

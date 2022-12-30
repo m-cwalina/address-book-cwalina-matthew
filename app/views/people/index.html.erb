@@ -47,42 +47,47 @@
       <div class='col'>
         <%= addresses_form.text_field :state, placeholder: "State" %>
       </div>
-      <div class='col'>
-        <%= addresses_form.country_select :country, placeholder: "Country"  %>
-      </div>
+    </div>
+    <div class="form-group" style="margin: auto; padding: 10px">
+      <%= addresses_form.country_select :country, placeholder: "Country"  %>
     </div>
 
 
   <% end %>
 
 
-    Email:
-    <ul>
-      <%= form.fields_for :emails do |emails_form| %>
-        <li>
-          <%= emails_form.label :email_address %>
-          <%= emails_form.email_field :email_address %>
-        </li>
-          <%= emails_form.label :comment %>
-          <%= emails_form.text_area :comment %>
-        <li>
-      <% end %>
-    </ul>
+  <div class="address-title">
+    <h4>Email</h4>
+  </div>
 
-    Phone Number:
-    <ul>
-      <%= form.fields_for :phone_numbers do |numbers_form| %>
-        <li>
-          <%= numbers_form.label :phone_number %>
-          <%= numbers_form.telephone_field :phone_number %>
-        </li>
-          <%= numbers_form.label :comment %>
-          <%= numbers_form.text_area :comment %>
-        <li>
+      <%= form.fields_for :emails do |emails_form| %>
+        <div class='form-group' style="margin: auto; padding: 15px">
+          <%= emails_form.email_field :email_address, placeholder: "Email" %>
+        </div>
+        <div class='form-group' style="margin: auto; padding: 15px">
+          <%= emails_form.text_area :comment, placeholder: "Comments?"  %>
+        </div>
       <% end %>
-    </ul>
-    <%= form.submit 'Add Person', class: "btn btn-outline-success btn-lg" %>
+
+  <div class="address-title">
+    <h4>Phone Number</h4>
+  </div>
+
+      <%= form.fields_for :phone_numbers do |numbers_form| %>
+        <div class='form-group' style="margin: auto; padding: 15px">
+          <%= numbers_form.telephone_field :phone_number, placeholder: "Phone Number"  %>
+        </div>
+        <div class='form-group' style="margin: auto; padding: 15px">
+          <%= numbers_form.text_area :comment, placeholder: "Comments?"  %>
+        </div>
+      <% end %>
+
+      <div class="address-title">
+        <%= form.submit 'Add Person', class: "btn btn-outline-success btn-lg" %>
+      </div>
+
   <% end %>
+
 </div>
 
 <div id="people-container">
@@ -134,9 +139,6 @@ $( "#form" ).submit(function( event ) {
   console.log( "Handler for .submit() called." );
   var person = ($('form').serializeArray())
   console.log(person)
-  event.preventDefault();
-    var form = $(this);
-    var actionUrl = form.attr('action');
 
     $.ajax({
         type: "POST",

@@ -15,8 +15,14 @@
  */
 
  @import "bootstrap/scss/bootstrap";
+ @import "home";
 
 .person-name-detail {
   display: flex;
   justify-content: center;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #F3F2EE;
 }

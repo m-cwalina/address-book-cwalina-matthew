@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :users, only: %i[ new index ]
+  resources :users, only: %i[new index]
   resources :sessions, only: %i[new create destroy]
 
   # Root route for home page

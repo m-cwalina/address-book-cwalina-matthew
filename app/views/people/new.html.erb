@@ -1,7 +1,5 @@
-
-
 <div id='form'>
-  <%= form_with(model: @person, url: "/api/v1/people/#{@person.id}", method: :patch, local: false) do |form| %>
+  <%= form_with(html: {:id => "form"}, url: "/api/v1/people") do |form| %>
 
     <div class='form-group' style="margin: auto; padding: 15px">
       <%= form.select :salutation, ["Mr", "Mrs.", "Ms."], class: "form-control", size: '3', placeholder: "Mr."%>
@@ -91,3 +89,22 @@
   <% end %>
 
 </div>
+
+<script>
+$( "#form" ).submit(function( event ) {
+  console.log( "Handler for .submit() called." );
+  var person = ($('form').serializeArray())
+  console.log(person)
+
+    $.ajax({
+        type: "POST",
+        url: 'api/v1/people',
+        dataType: 'json',
+        data: person, // serializes the form's elements.
+        success: function(data)
+        {
+          $('#people-container').html(data);
+        }
+    });
+});
+</script>

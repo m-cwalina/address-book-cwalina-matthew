@@ -1,64 +1,91 @@
-<%= form_with do |form| %>
-  <%= form.label :salutation %>
-  <%= form.select :salutation, ["Mr", "Mrs.", "Ms."] %>
-  <%= form.label :first_name %>
-  <%= form.text_field :first_name %>
-  <%= form.label :middle_name %>
-  <%= form.text_field :middle_name %>
-  <%= form.label :last_name %>
-  <%= form.text_field :last_name %>
-  <%= form.label :birth_date %>
-  <%= form.date_select :birth_date %>
-  <%= form.label :SSN %>
-  <%= form.text_field :SSN %>
-  <%= form.label :comment %>
-  <%= form.text_area :comment %>
+<div id='form'>
+  <%= form_with(html: {:id => "form"}) do |form| %>
 
-  Address:
-  <ul>
-    <%= form.fields_for :addresses do |addresses_form| %>
-      <li>
-        <%= addresses_form.label :street %>
-        <%= addresses_form.text_field :street %>
-      </li>
-        <%= addresses_form.label :town %>
-        <%= addresses_form.text_field :town %>
-      <li>
-        <%= addresses_form.label :zip_code %>
-        <%= addresses_form.text_field :zip_code %>
-      </li>
-        <%= addresses_form.label :state %>
-        <%= addresses_form.text_field :state %>
-      <li>
-        <%= addresses_form.country_select :country %>
-      </li>
-    <% end %>
-  </ul>
+    <div class='form-group' style="margin: auto; padding: 15px">
+      <%= form.select :salutation, ["Mr", "Mrs.", "Ms."], class: "form-control", size: '3', placeholder: "Mr."%>
+    </div>
 
-  Email:
-  <ul>
-    <%= form.fields_for :emails do |emails_form| %>
-      <li>
-        <%= emails_form.label :email_address %>
-        <%= emails_form.email_field :email_address %>
-      </li>
-        <%= emails_form.label :comment %>
-        <%= emails_form.text_area :comment %>
-      <li>
-    <% end %>
-  </ul>
+    <div class='row' style="margin: auto; padding: 15px">
+      <div class='col'>
+        <%= form.text_field :first_name, class: "form-control", placeholder: "First name"%>
+      </div>
+      <div class='col'>
+        <%= form.text_field :middle_name, class: "form-control", placeholder: "Middle name" %>
+      </div>
+      <div class="col">
+        <%= form.text_field :last_name, class: "form-control", placeholder: "Last name" %>
+      </div>
+    </div>
 
-  Phone Number:
-  <ul>
-    <%= form.fields_for :phone_numbers do |numbers_form| %>
-      <li>
-        <%= numbers_form.label :phone_number %>
-        <%= numbers_form.telephone_field :phone_number %>
-      </li>
-        <%= numbers_form.label :comment %>
-        <%= numbers_form.text_area :comment %>
-      <li>
-    <% end %>
-  </ul>
-  <%= form.submit 'Add Person' %>
-<% end %>
+    <div class="form-group" style="margin: auto; padding: 10px">
+      <%= form.label :birthday %>
+      <%= form.date_select :birth_date, class: "form-control" %>
+    </div>
+    <div class="form-group" style="margin: auto; padding: 10px">
+      <%= form.text_field :SSN, class: "form-control", placeholder: "SSN"  %>
+    </div>
+    <div class="form-group" style="margin: auto; padding: 10px">
+      <%= form.text_area :comment, placeholder: "Comments?"  %>
+    </div>
+
+  <div class="address-title">
+    <h4>Address</h4>
+  </div>
+
+  <%= form.fields_for :addresses do |addresses_form| %>
+
+    <div class="form-group" style="margin: auto; padding: 10px">
+      <%= addresses_form.text_field :street, placeholder: "Address" %>
+    </div>
+    <div class='row' style="margin: auto; padding: 15px">
+      <div class='col'>
+        <%= addresses_form.text_field :town, placeholder: "City"  %>
+      </div>
+      <div class='col'>
+        <%= addresses_form.text_field :zip_code, placeholder: "Zip Code" %>
+      </div>
+      <div class='col'>
+        <%= addresses_form.text_field :state, placeholder: "State" %>
+      </div>
+    </div>
+    <div class="form-group" style="margin: auto; padding: 10px">
+      <%= addresses_form.country_select :country, placeholder: "Country"  %>
+    </div>
+
+
+  <% end %>
+
+
+  <div class="address-title">
+    <h4>Email</h4>
+  </div>
+
+      <%= form.fields_for :emails do |emails_form| %>
+        <div class='form-group' style="margin: auto; padding: 15px">
+          <%= emails_form.email_field :email_address, placeholder: "Email" %>
+        </div>
+        <div class='form-group' style="margin: auto; padding: 15px">
+          <%= emails_form.text_area :comment, placeholder: "Comments?"  %>
+        </div>
+      <% end %>
+
+  <div class="address-title">
+    <h4>Phone Number</h4>
+  </div>
+
+      <%= form.fields_for :phone_numbers do |numbers_form| %>
+        <div class='form-group' style="margin: auto; padding: 15px">
+          <%= numbers_form.telephone_field :phone_number, placeholder: "Phone Number"  %>
+        </div>
+        <div class='form-group' style="margin: auto; padding: 15px">
+          <%= numbers_form.text_area :comment, placeholder: "Comments?"  %>
+        </div>
+      <% end %>
+
+      <div class="address-title">
+        <%= form.submit 'Add Person', class: "btn btn-outline-success btn-lg" %>
+      </div>
+
+  <% end %>
+
+</div>

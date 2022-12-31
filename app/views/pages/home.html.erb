@@ -1,7 +1,19 @@
-<% if current_user %>
-  Logged in as <%= current_user.email %>.
-  <%= link_to "Log Out", logout_path %>
-<% else %>
-  <%= link_to "Sign Up", signup_path %> or
-  <%= link_to "Log In", login_path %>
-<% end %>
+<div class='title'>
+  <h1>WikiLane</h1>
+</div>
+
+<div class="sign-in">
+  <% if current_user %>
+    <div class="btn btn-success btn-lg custom">Logged In</div>
+    <%=link_to logout_path do %>
+      <div class="btn btn-danger btn-lg custom">Log Out</div>
+    <% end %>
+  <% else %>
+    <%=link_to signup_path do %>
+      <div type="button" class="btn btn-success btn-lg custom">Sign Up</div>
+    <% end %>
+        <%=link_to login_path do %>
+      <div type="button" class="btn btn-primary btn-lg custom">Log In</div>
+    <% end %>
+  <% end %>
+</div>

@@ -9,24 +9,7 @@ class Api::V1::PeopleController < ApplicationController
 
   # I can not find a way to use strong_params with nested_attributes
   def create
-    @person = Person.new(
-      salutation: params[:salutation], first_name: params[:first_name], middle_name: params[:middel_name],
-      last_name: params[:last_name], SSN: params[:SSN], birth_date: params[:birth_date], comment: params[:comment],
-      addresses_attributes: [
-        id: params[:addresses][:id], street: params[:addresses][:street],
-        town: params[:addresses][:town], zip_code: params[:addresses][:zip_code],
-        state: params[:addresses][:state], country: params[:addresses][:country]
-      ],
-      emails_attributes: [
-        id: params[:emails][:id], email_address: params[:emails][:email_address],
-        comment: params[:emails][:comment]
-      ],
-      phone_numbers_attributes: [
-        id: params[:phone_numbers][:id],
-        phone_number: params[:phone_numbers][:phone_number],
-        comment: params[:phone_numbers][:comment]
-      ]
-    )
+    @person = Person.new(person_params)
     if @person.save
       redirect_to people_path
     else
@@ -62,3 +45,22 @@ class Api::V1::PeopleController < ApplicationController
     )
   end
 end
+
+#    @person = Person.new(
+#      salutation: params[:salutation], first_name: params[:first_name], middle_name: params[:middel_name],
+#      last_name: params[:last_name], SSN: params[:SSN], birth_date: params[:birth_date], comment: params[:comment],
+#      addresses_attributes: [
+#        id: params[:addresses][:id], street: params[:addresses][:street],
+#        town: params[:addresses][:town], zip_code: params[:addresses][:zip_code],
+#        state: params[:addresses][:state], country: params[:addresses][:country]
+#      ],
+#      emails_attributes: [
+#       id: params[:emails][:id], email_address: params[:emails][:email_address],
+#        comment: params[:emails][:comment]
+#      ],
+#      phone_numbers_attributes: [
+#        id: params[:phone_numbers][:id],
+#        phone_number: params[:phone_numbers][:phone_number],
+#       comment: params[:phone_numbers][:comment]
+#     ]
+#    )

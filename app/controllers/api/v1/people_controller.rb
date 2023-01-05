@@ -1,24 +1,14 @@
 class Api::V1::PeopleController < ApplicationController
   before_action :set_person, only: %i[edit update destroy show]
+  skip_before_action :verify_authenticity_token, only: %i[create]
   before_action :authorize
 
   def index
     @people = Person.all
-    @person = Person.new
   end
 
-  # I can not find a way to use strong_params with nested_attributes
   def create
-    @person = Person.new(person_params)
-    if @person.save
-      redirect_to people_path
-    else
-      render :new
-    end
-  end
-
-  def edit
-    @person
+    @person = Person.create!(person_params)
   end
 
   def update
@@ -37,7 +27,7 @@ class Api::V1::PeopleController < ApplicationController
   end
 
   def person_params
-    params.permit(
+    params.require(:person).permit(
       :salutation, :first_name, :middle_name, :last_name, :SSN, :birth_date, :comment,
       addresses_attributes: [:id, :street, :town, :zip_code, :state, :country, :_destroy],
       emails_attributes: [:id, :email_address, :comment, :_destroy],
@@ -47,7 +37,7 @@ class Api::V1::PeopleController < ApplicationController
 end
 
 #    @person = Person.new(
-#      salutation: params[:salutation], first_name: params[:first_name], middle_name: params[:middel_name],
+#     salutation: params[:salutation], first_name: params[:first_name], middle_name: params[:middel_name],
 #      last_name: params[:last_name], SSN: params[:SSN], birth_date: params[:birth_date], comment: params[:comment],
 #      addresses_attributes: [
 #        id: params[:addresses][:id], street: params[:addresses][:street],
@@ -55,12 +45,17 @@ end
 #        state: params[:addresses][:state], country: params[:addresses][:country]
 #      ],
 #      emails_attributes: [
-#       id: params[:emails][:id], email_address: params[:emails][:email_address],
+#        id: params[:emails][:id], email_address: params[:emails][:email_address],
 #        comment: params[:emails][:comment]
 #      ],
 #      phone_numbers_attributes: [
-#        id: params[:phone_numbers][:id],
+#       id: params[:phone_numbers][:id],
 #        phone_number: params[:phone_numbers][:phone_number],
-#       comment: params[:phone_numbers][:comment]
-#     ]
+#        comment: params[:phone_numbers][:comment]
+#      ]
 #    )
+#    if @person.save
+#      redirect_to people_path
+#   else
+#      render :new
+#    end

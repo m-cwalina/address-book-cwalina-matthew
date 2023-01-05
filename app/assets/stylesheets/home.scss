@@ -9,10 +9,26 @@
   width: 125px;
 }
 
+.custom2 {
+  width: 90px;
+}
+
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 50px;
   font-size: 45px;
+}
+
+.title-button {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 50px;
+}
+
+a {
+  text-decoration: none;
 }

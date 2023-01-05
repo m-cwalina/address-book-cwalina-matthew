@@ -4,17 +4,20 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
+  # Routes for sessions
   resources :users, only: %i[new index]
   resources :sessions, only: %i[new create destroy]
 
   # Root route for home page
   root to: 'pages#home', as: :home
 
-  resources :people
+  # Route for people controller
+  resources :people, only: %i[new index edit]
 
+  # Routes for api people controller
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :people, only: %i[index create destroy update]
+      resources :people, only: %i[index create edit destroy update]
     end
   end
 end

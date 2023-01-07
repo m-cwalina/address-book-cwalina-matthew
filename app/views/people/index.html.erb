@@ -58,9 +58,7 @@
       <%= addresses_form.country_select :country, placeholder: "Country"  %>
     </div>
 
-
   <% end %>
-
 
   <div class="address-title">
     <h4>Email</h4>
@@ -88,57 +86,70 @@
         </div>
       <% end %>
 
-      <div id="submit">
-        <button>AJAX Submit</button>
-      </div>
-
   <% end %>
-
+  <div id="submit">
+    <button id=#submit>Add Person</button>
+  </div>
 </div>
 
-<script>
-$( "#submit" ).submit(function( event ) {
+<div id="people-container">
+  <div id="name-container">
+    <h2 class="name"></h2>
+  </div>
+  <div class='person-buttons'>
+  </div>
+</div>
 
+
+<script type="text/javascript" charset="utf-8">
+$(function() {
+$("#submit").click(function(event) {
   var person = ($('form').serializeArray())
-  console.log(person)
     $.ajax({
         type: "POST",
         url: 'api/v1/people',
         dataType: 'json',
-        data: person, // serializes the form's elements.
-        success: function(data)
-        {
-          $('#people-container').load(data);
-        }
+        data: person,
+        success: function(data) {
+          $("#people-container").append(JSON.stringify(data));
+        },
     });
+  });
 });
-</script>
 
-<div id="people-container">
-</div>
+/*
+$(document).ready(function() {
+  $.get( "api/v1/people", function(data) {
+    data.map(person => {
+      $(".name").append(person.first_name);
+      $(".name").append(person.middle_name);
+      $(".name").append(person.last_name);
+      $(".person-buttons").append('<a>Edit</a>');
+    });
+  });
+});
+*/
 
-<script type="text/javascript" charset="utf-8">
+
 $(function() {
   $(document).ready(function() {
-      $.get("api/v1/people", function(data) {
+    $.get("api/v1/people", function(data) {
         let string = data.map(person => {
           return `
             <div class="person-name-detail">
               <div>
-                <h4>Name: ${person.first_name} ${person.middle_name} ${person.last_name}</h4>
-              </div>
-              <div>
-                <h4>Email: ${person.address.street}</h4>
+                <h4>${person.first_name} ${person.middle_name} ${person.last_name}</h4>
               </div>
               <div class='person-buttons'>
+                <button type="button" class="btn btn-success custom2"><a href='/people/${person.id}'>Show</a></button>
                 <button type="button" class="btn btn-warning custom2"><a href='/people/${person.id}/edit'>Edit</a></button>
                 <button type="button" class="btn btn-danger custom2">Delete</button>
               </div>
             </div>`
           }).join(' ');
       $("#people-container").append(string);
-
     });
   });
 });
+
 </script>

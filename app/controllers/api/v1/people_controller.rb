@@ -1,6 +1,6 @@
 class Api::V1::PeopleController < ApplicationController
   before_action :set_person, only: %i[edit update destroy show]
-  skip_before_action :verify_authenticity_token, only: %i[create]
+  skip_before_action :verify_authenticity_token, only: %i[create edit update]
   before_action :authorize
 
   def index
@@ -9,11 +9,23 @@ class Api::V1::PeopleController < ApplicationController
 
   def create
     @person = Person.create!(person_params)
+    render json: @person
+  end
+
+  def show
+    @person = Person.find(params[:id])
+  end
+
+  def edit
+    @person = Person.find(params[:id])
   end
 
   def update
-    @person.update(person_params)
-    redirect_to people_path
+    if @person.update(person_params)
+      redirect_to people_path
+    else
+      render :new
+    end
   end
 
   def destroy

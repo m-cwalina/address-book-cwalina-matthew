@@ -1,7 +1,5 @@
-<h1>Edit Person</h1>
-
 <div id='form'>
-  <%= form_for(Person.new, url: "api/v1/people", :remote=>false) do |form| %>
+  <%= form_for(Person.find(params[:id]), url: "/api/v1/people/#{@person}", :remote=>false, method: :PATCH) do |form| %>
 
     <div class='form-group' style="margin: auto; padding: 15px">
       <%= form.select :salutation, ["Mr", "Mrs.", "Ms."], class: "form-control", size: '3', placeholder: "Mr."%>
@@ -34,7 +32,7 @@
     <h4>Address</h4>
   </div>
 
-  <%= form.fields_for :addresses, Address.new do |addresses_form| %>
+  <%= form.fields_for :addresses do |addresses_form| %>
 
     <div class="form-group" style="margin: auto; padding: 10px">
       <%= addresses_form.text_field :street, placeholder: "Address" %>
@@ -54,15 +52,13 @@
       <%= addresses_form.country_select :country, placeholder: "Country"  %>
     </div>
 
-
   <% end %>
-
 
   <div class="address-title">
     <h4>Email</h4>
   </div>
 
-      <%= form.fields_for :emails, Email.new do |emails_form| %>
+      <%= form.fields_for :emails do |emails_form| %>
         <div class='form-group' style="margin: auto; padding: 15px">
           <%= emails_form.email_field :email_address, placeholder: "Email" %>
         </div>
@@ -75,7 +71,7 @@
     <h4>Phone Number</h4>
   </div>
 
-      <%= form.fields_for :phone_numbers, PhoneNumber.new do |numbers_form| %>
+      <%= form.fields_for :phone_numbers do |numbers_form| %>
         <div class='form-group' style="margin: auto; padding: 15px">
           <%= numbers_form.telephone_field :phone_number, placeholder: "Phone Number"  %>
         </div>
@@ -84,28 +80,30 @@
         </div>
       <% end %>
 
-      <div id="submit">
-        <button>AJAX Submit</button>
-      </div>
-
   <% end %>
+
+  <div id="submit">
+    <button id="submit">Edit Person</button>
+  </div>
 
 </div>
 
 <script>
-$( "#submit" ).submit(function( event ) {
-  var person = ($('form').serializeArray())
-  console.log(person)
-
+$(function() {
+$( "#submit" ).click(function( event ) {
+  let id = location.pathname.split('/')[2];
+  let person = ($('form').serializeArray());
     $.ajax({
         type: "PATCH",
-        url: `api/v1/people/${id}/edit`,
+        url: `/api/v1/people/${id}`,
         dataType: 'json',
-        data: person, // serializes the form's elements.
+        data: person,
         success: function(data)
         {
           $('#people-container').html(data);
         }
     });
+    window.location.href='/people';
+  });
 });
 </script>

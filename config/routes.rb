@@ -12,12 +12,12 @@ Rails.application.routes.draw do
   root to: 'pages#home', as: :home
 
   # Route for people controller
-  resources :people, only: %i[new index edit]
+  resources :people, only: %i[index edit show]
 
   # Routes for api people controller
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :people, only: %i[index create edit destroy update]
+      resources :people, only: %i[index create show edit destroy update]
     end
   end
 end

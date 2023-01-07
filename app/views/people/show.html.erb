@@ -1,0 +1,28 @@
+<div class="show-container">
+  <h2>Email</h2>
+    <h4 class="email-address"></h4>
+    <p class="email-comment"></p>
+  <h2>Address</h2>
+    <h4 class= "address-street"></h3>
+</div>
+
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+  let id = location.pathname.split('/')[2];
+  console.log("Hello");
+  $.ajax({
+    type: "get",
+    url: `/api/v1/people/${id}`,
+    success: function(data) {
+      data.email.map(email => {
+        $(".email-address").append(email.email_address);
+        $(".email-comment").append(email.comment);
+      })
+    }
+  });
+});
+</script>

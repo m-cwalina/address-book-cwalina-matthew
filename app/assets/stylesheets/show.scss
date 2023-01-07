@@ -1,5 +1,6 @@
-#people-container {
+.show-container {
   display: grid;
+  justify-content: center;
   text-align: center;
   background-color: #F7F7F7;
   width: auto;
@@ -10,11 +11,20 @@
     0 3px 6px 0 rgba(25, 32, 36, 0.16);
 }
 
-.link {
-  text-decoration: none;
-  color: white;
+.address-town-container {
+  display: flex;
+  justify-content: center;
 }
 
-.person-name-detail {
-  margin: 15px;
+.name {
+  display: flex;
+  justify-content: center;
+}
+
+#delete {
+  margin: 10px;
+}
+
+.size {
+  width: 150px;
 }

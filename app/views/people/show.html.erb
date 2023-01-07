@@ -1,14 +1,34 @@
 <div class="show-container">
-  <h2>Email</h2>
+  <div class="name">
+    <div><h2 class="title-first" style="margin: 5px;"></h2></div>
+    <div><h2 class="title-middle" style="margin: 5px;"></h2></div>
+    <div><h2 class="title-last" style="margin: 5px;"></h2></div>
+  </div>
+
+  <h2 style="margin: 20px;">Address:</h2>
+    <h4 class="address-street"></h4>
+    <div class="address-town-container">
+      <div><h4 class="address-town" style="margin: 5px;"></h4></div>
+      <div><h4 class="address-zip-code" style="margin: 5px;"></h4></div>
+    </div>
+    <div class="address-town-container">
+      <div><h4 class="address-state" style="margin: 5px;"></h4></div>
+      <div><h4 class="address-country" style="margin: 5px;"></h4></div>
+    </div>
+
+  <h2 style="margin: 20px;">Email:</h2>
     <h4 class="email-address"></h4>
     <p class="email-comment"></p>
-  <h2>Address</h2>
-    <h4 class= "address-street"></h3>
+
+  <h2 style="margin: 20px;">Phone Number:</h2>
+    <h4 class="phone-number"></h4>
+    <p class="phone-comment"></p>
+
+    <button id="delete" type="button" class="btn btn-danger">Delete</button>
+    <%=link_to people_path do %>
+      <button type="button" class="btn btn-success">Back</button>
+    <% end %>
 </div>
-
-
-
-
 
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function() {
@@ -18,11 +38,41 @@ $(document).ready(function() {
     type: "get",
     url: `/api/v1/people/${id}`,
     success: function(data) {
-      data.email.map(email => {
+      $(".title-first").append(data.first_name);
+      $(".title-middle").append(data.middle_name);
+      $(".title-last").append(data.last_name);
+      data.emails.map(email => {
         $(".email-address").append(email.email_address);
         $(".email-comment").append(email.comment);
       })
+      data.addresses.map(address => {
+        $(".address-street").append(address.street);
+        $(".address-town").append(address.town);
+        $(".address-zip-code").append(address.zip_code);
+        $(".address-state").append(address.state);
+        $(".address-country").append(address.country);
+      })
+      data.phone_numbers.map(phone => {
+        $(".phone-number").append(phone.phone_number);
+        $(".phone-comment").append(phone.comment);
+      })
     }
+  });
+});
+
+$(function() {
+$("#delete").click(function(event) {
+  let id = location.pathname.split('/')[2];
+    $.ajax({
+        type: "DELETE",
+        url: `/api/v1/people/${id}`,
+        dataType: 'json',
+        data: {"id": id },
+        success: function(data) {
+          alert("Delete")
+        }
+    });
+    window.location.href='/people';
   });
 });
 </script>

@@ -92,12 +92,13 @@
   </div>
 </div>
 
+<div class='title-button'>
+  <div>
+    <h1>Contacts</h1>
+  </div>
+</div>
+
 <div id="people-container">
-  <div id="name-container">
-    <h2 class="name"></h2>
-  </div>
-  <div class='person-buttons'>
-  </div>
 </div>
 
 
@@ -111,24 +112,11 @@ $("#submit").click(function(event) {
         dataType: 'json',
         data: person,
         success: function(data) {
-          $("#people-container").append(JSON.stringify(data));
-        },
+          alert("Submitted")
+        }
     });
   });
 });
-
-/*
-$(document).ready(function() {
-  $.get( "api/v1/people", function(data) {
-    data.map(person => {
-      $(".name").append(person.first_name);
-      $(".name").append(person.middle_name);
-      $(".name").append(person.last_name);
-      $(".person-buttons").append('<a>Edit</a>');
-    });
-  });
-});
-*/
 
 
 $(function() {
@@ -136,20 +124,20 @@ $(function() {
     $.get("api/v1/people", function(data) {
         let string = data.map(person => {
           return `
+            <div class="person-container">
             <div class="person-name-detail">
               <div>
                 <h4>${person.first_name} ${person.middle_name} ${person.last_name}</h4>
               </div>
               <div class='person-buttons'>
-                <button type="button" class="btn btn-success custom2"><a href='/people/${person.id}'>Show</a></button>
-                <button type="button" class="btn btn-warning custom2"><a href='/people/${person.id}/edit'>Edit</a></button>
-                <button type="button" class="btn btn-danger custom2">Delete</button>
+                <button type="button" class="btn btn-primary custom2"><a class='link' href='/people/${person.id}'>Details</a></button>
+                <button type="button" class="btn btn-secondary custom2"><a class='link' href='/people/${person.id}/edit'>Edit</a></button>
               </div>
+            </div>
             </div>`
           }).join(' ');
       $("#people-container").append(string);
     });
   });
 });
-
 </script>

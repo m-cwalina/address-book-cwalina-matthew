@@ -103,6 +103,8 @@
 
 
 <script type="text/javascript" charset="utf-8">
+
+/* Post Request to call create action in API Controller */
 $(function() {
 $("#submit").click(function(event) {
   var person = ($('form').serializeArray())
@@ -115,10 +117,11 @@ $("#submit").click(function(event) {
           alert("Submitted")
         }
     });
+    window.location.href='/people';
   });
 });
 
-
+/* Function for index action in API Controller */
 $(function() {
   $(document).ready(function() {
     $.get("api/v1/people", function(data) {
@@ -127,7 +130,7 @@ $(function() {
             <div class="person-container">
             <div class="person-name-detail">
               <div>
-                <h4>${person.first_name} ${person.middle_name} ${person.last_name}</h4>
+                <h4 class="names">${person.first_name} ${person.middle_name} ${person.last_name}</h4>
               </div>
               <div class='person-buttons'>
                 <button type="button" class="btn btn-primary custom2"><a class='link' href='/people/${person.id}'>Details</a></button>

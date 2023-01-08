@@ -3,6 +3,7 @@ class Api::V1::PeopleController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[create edit update destroy]
   before_action :authorize
 
+  # The json is rendered using index.json.jbuilder under views
   def index
     @people = Person.all
   end
@@ -11,6 +12,7 @@ class Api::V1::PeopleController < ApplicationController
     @person = Person.create!(person_params)
   end
 
+  # The json is renedered using show.json.jbuilder under views
   def show
     @person
   end

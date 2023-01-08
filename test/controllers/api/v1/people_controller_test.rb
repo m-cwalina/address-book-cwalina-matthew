@@ -2,6 +2,10 @@ require "test_helper"
 
 class Api::V1::PeopleControllerTest < ActionDispatch::IntegrationTest
 
+def setup
+  @current_user = users(:one)
+end
+
   test 'should create a person' do
     assert_difference 'Person.count' do
       post '/api/v1/people',

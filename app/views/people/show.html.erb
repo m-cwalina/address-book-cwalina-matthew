@@ -1,8 +1,9 @@
 <div class="show-container">
   <div class="name">
-    <div><h2 class="title-first" style="margin: 5px;"></h2></div>
-    <div><h2 class="title-middle" style="margin: 5px;"></h2></div>
-    <div><h2 class="title-last" style="margin: 5px;"></h2></div>
+  <div><h2 class="salutation" style="margin: 3px;"></h2></div>
+    <div><h2 class="title-first" style="margin: 3px;"></h2></div>
+    <div><h2 class="title-middle" style="margin: 3px;"></h2></div>
+    <div><h2 class="title-last" style="margin: 3px;"></h2></div>
   </div>
 
   <h2 style="margin: 20px;">Address:</h2>
@@ -38,6 +39,7 @@ $(document).ready(function() {
     type: "get",
     url: `/api/v1/people/${id}`,
     success: function(data) {
+      $(".salutation").append(data.salutation);
       $(".title-first").append(data.first_name);
       $(".title-middle").append(data.middle_name);
       $(".title-last").append(data.last_name);

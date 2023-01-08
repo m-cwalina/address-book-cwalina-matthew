@@ -83,12 +83,13 @@
   <% end %>
 
   <div id="submit">
-    <button id="submit">Edit Person</button>
+    <button id="submit" class="btn btn-success btn-lg">Edit Person</button>
   </div>
 
 </div>
 
 <script>
+/* Function to call the update method in API Controller */
 $(function() {
 $( "#submit" ).click(function( event ) {
   let id = location.pathname.split('/')[2];

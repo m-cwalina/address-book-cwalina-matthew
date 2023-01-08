@@ -9,23 +9,18 @@ class Api::V1::PeopleController < ApplicationController
 
   def create
     @person = Person.create!(person_params)
-    render json: @person
   end
 
   def show
-    @person = Person.find(params[:id])
+    @person
   end
 
   def edit
-    @person = Person.find(params[:id])
+    @person
   end
 
   def update
-    if @person.update(person_params)
-      redirect_to people_path
-    else
-      render :new
-    end
+    @person.update(person_params)
   end
 
   def destroy

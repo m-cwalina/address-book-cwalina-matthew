@@ -31,9 +31,9 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
+/* get function to call index action in API Controller using jquery */
 $(document).ready(function() {
   let id = location.pathname.split('/')[2];
-  console.log("Hello");
   $.ajax({
     type: "get",
     url: `/api/v1/people/${id}`,

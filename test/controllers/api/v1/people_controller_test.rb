@@ -2,9 +2,11 @@ require "test_helper"
 
 class Api::V1::PeopleControllerTest < ActionDispatch::IntegrationTest
 
-def setup
-  @current_user = users(:one)
-end
+  setup do
+    @user = users(:one)
+    @person = people(:one)
+    sign_in_as(@user, 'password')
+  end
 
   test 'should create a person' do
     assert_difference 'Person.count' do
@@ -37,4 +39,32 @@ end
                               }}
     end
   end
+
+  test "get index" do
+    get '/api/v1/people'
+    assert_response :success
+  end
+
+  test "update person" do
+    updated_name = "Jose"
+
+    patch '/api/v1/people/1',
+      params: {person: { salutation: @person.salutation,
+                         first_name: updated_name,
+                         middle_name: @person.middle_name,
+                         last_name: @person.last_name,
+                         SSN: @person.SSN,
+                         birth_date: @person.birth_date,
+                         comment: @person.comment
+                        }}
+
+    assert_not_equal updated_name, @person.first_name
+  end
+
+  test 'destroy person' do
+    assert_difference 'Person.count', -1 do
+      delete '/api/v1/people/1'
+    end
+  end
+
 end

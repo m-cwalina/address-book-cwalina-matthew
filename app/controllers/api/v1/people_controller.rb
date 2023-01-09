@@ -17,6 +17,7 @@ class Api::V1::PeopleController < ApplicationController
     @person
   end
 
+  # Needed for the edit form
   def edit
     @person
   end

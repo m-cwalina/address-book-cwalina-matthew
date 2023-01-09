@@ -1,10 +1,14 @@
 <div class="show-container">
   <div class="name">
-  <div><h2 class="salutation" style="margin: 3px;"></h2></div>
+    <div><h2 class="salutation" style="margin: 3px;"></h2></div>
     <div><h2 class="title-first" style="margin: 3px;"></h2></div>
     <div><h2 class="title-middle" style="margin: 3px;"></h2></div>
     <div><h2 class="title-last" style="margin: 3px;"></h2></div>
   </div>
+  <div>
+    <div><h4 class='ssn' style="margin: 5px;">SSN:</h4></div>
+  </div>
+
 
   <h2 style="margin: 20px;">Address:</h2>
     <h4 class="address-street"></h4>
@@ -43,6 +47,7 @@ $(document).ready(function() {
       $(".title-first").append(data.first_name);
       $(".title-middle").append(data.middle_name);
       $(".title-last").append(data.last_name);
+      $(".ssn").append(data.SSN);
       data.emails.map(email => {
         $(".email-address").append(email.email_address);
         $(".email-comment").append(email.comment);

@@ -2,8 +2,8 @@
 
 one:
   email: MyString
-  password_digest: MyString
+  password_digest: "$2a$12$aosyoKLBWPraHHFrIFX.MOYh9pLQS8YNRCG..1HKnQ9Lznh7O5W/."
 
 two:
   email: MyString
-  password_digest: MyString
+  password_digest: "$2a$12$aosyoKLBWPraHHFrIFX.MOYh9pLQS8YNRCG..1HKnQ9Lznh7O5W/."

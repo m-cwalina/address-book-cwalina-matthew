@@ -4,7 +4,6 @@
 - Rails Version: '6.1.7'
 - postgreSQL Version: '1.1'
 
-
 Setup:
 
 1. git clone the repository

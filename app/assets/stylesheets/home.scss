@@ -1,5 +1,5 @@
 .sign-in {
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: space-evenly;
   padding: 50px;
@@ -31,4 +31,8 @@
 
 a {
   text-decoration: none;
+}
+
+#home-buttons {
+  margin: 15px;
 }
